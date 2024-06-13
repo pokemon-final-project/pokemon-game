@@ -84,7 +84,7 @@ public class PokemonGrid extends JPanel {
         // Load 10 Pokemon images (you can change this to actual image paths)
         pokemonIcons = new ImageIcon[10];
         for (int i = 0; i < 10; i++) {
-            pokemonIcons[i] = new ImageIcon("pokemon-image/" + (i + 1) + ".png");
+            pokemonIcons[i] = new ImageIcon("pokemon-data/image" + (i + 1) + ".png");
         }
     }
 
