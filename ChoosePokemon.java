@@ -68,7 +68,7 @@ public class ChoosePokemon extends JFrame {
             });
         }
         
-        westGrid.setBorder(BorderFactory.createTitledBorder("GridLayout"));
+        westGrid.setBorder(BorderFactory.createTitledBorder("ALL Pokemon"));
         westGrid.setPreferredSize(new Dimension(600,  1000));
 
         // 用戶所選的寶可夢
