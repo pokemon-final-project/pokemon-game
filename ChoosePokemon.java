@@ -25,22 +25,22 @@ public class ChoosePokemon extends JFrame {
         // 初始化主面板並設置為 BorderLayout
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        JLabel northLabel = new JLabel("選擇你的Pokemon", SwingConstants.CENTER);
-        northLabel.setPreferredSize(new Dimension(100, 100));
-        northLabel.setFont(new Font("Serif", Font.PLAIN, 20)); 
+        JLabel northBox = new JLabel("選擇你的Pokemon", SwingConstants.CENTER);
+        northBox.setPreferredSize(new Dimension(100, 100));
+        northBox.setFont(new Font("Serif", Font.PLAIN, 20)); 
         
         // pokemon 列表
-        JPanel westGrid = new JPanel(new GridLayout(6, 5));
+        JPanel westBox = new JPanel(new GridLayout(6, 5));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 5, 10, 5);    
 
-        for(int i=0; i<30;i++){
+        for(int i=1; i<=30;i++){
             ImageIcon icon = new ImageIcon("pokemon-data/image/"+i+".png");
             Image image = icon.getImage(); // Transform it
             Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // Scale it the smooth way
             icon = new ImageIcon(newimg);  // Transform it back
             JLabel label = new JLabel(icon);
-            westGrid.add(label,gbc);
+            westBox.add(label,gbc);
             label.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -52,6 +52,7 @@ public class ChoosePokemon extends JFrame {
                     Timer timer = new Timer(1000, evt -> selectedLabel.setBorder(null));
                     timer.setRepeats(false);
                     timer.start();
+                    repaint(); //刷新頁面
                 }
 
                 @Override
@@ -68,38 +69,44 @@ public class ChoosePokemon extends JFrame {
             });
         }
         
-        westGrid.setBorder(BorderFactory.createTitledBorder("ALL Pokemon"));
-        westGrid.setPreferredSize(new Dimension(600,  1000));
+        westBox.setBorder(BorderFactory.createTitledBorder("ALL Pokemon"));
+        westBox.setPreferredSize(new Dimension(600,  1000));
 
         // 用戶所選的寶可夢
-        Box chosen = Box.createVerticalBox();
+        Box eastBox = Box.createVerticalBox();
         JLabel box1 = new JLabel("選擇你的Pokemon", SwingConstants.CENTER);
         box1.setPreferredSize(new Dimension(400, 400));
-        // chosen.setBorder(BorderFactory.createTitledBorder("BoxLayout"));
-        JLabel box2 = new JLabel("選擇你的Pokemon", SwingConstants.CENTER);
-        box2.setPreferredSize(new Dimension(400, 400));
-        chosen.add(box1);
-        chosen.add(box2);
-        chosen.setPreferredSize(new Dimension(600,  1000));
         
+        Box chosen = Box.createVerticalBox();
+        JLabel chosenBox1 = new JLabel("已選擇的Pokemon", SwingConstants.CENTER);
+        JLabel chosenBox2 = new JLabel("選擇你的Pokemon", SwingConstants.CENTER);
+        chosen.add(chosenBox1);
+        chosen.add(chosenBox2);
+        chosen.setPreferredSize(new Dimension(400, 400));
+        // eastBox.setBorder(BorderFactory.createTitledBorder("BoxLayout"));
+        eastBox.add(box1);
+        eastBox.add(chosen);
+        eastBox.setPreferredSize(new Dimension(600,  1000));
+        // JPanel westBox = new JPanel(new GridLayout(6, 5));
+
         // 添加一個包含 FlowLayout 的面板
 
-        JButton southLabel = new JButton("準備確定");
-        southLabel.setPreferredSize(new Dimension(1200, 100));
-        southLabel.setFont(new Font("Serif", Font.PLAIN, 20)); 
+        JButton summiButton = new JButton("準備確定");
+        summiButton.setPreferredSize(new Dimension(1200, 100));
+        summiButton.setFont(new Font("Serif", Font.PLAIN, 20)); 
         // JPanel flowPanel = new JPanel(new FlowLayout());    
         // flowPanel.add(new JButton("準備確定"));
         // flowPanel.setBorder(BorderFactory.createTitledBorder("FlowLayout"));
         // flowPanel.setFont(new Font("Serif", Font.PLAIN, 20)); 
-        // chosen.setPreferredSize(new Dimension(600,  100));
+        // eastBox.setPreferredSize(new Dimension(600,  100));
 
 
 
         // 加到面板到主面板
-        mainPanel.add(northLabel, BorderLayout.NORTH);
-        mainPanel.add(southLabel, BorderLayout.SOUTH);
-        mainPanel.add(westGrid, BorderLayout.WEST);
-        mainPanel.add(chosen, BorderLayout.EAST);
+        mainPanel.add(northBox, BorderLayout.NORTH);
+        mainPanel.add(summiButton, BorderLayout.SOUTH);
+        mainPanel.add(westBox, BorderLayout.WEST);
+        mainPanel.add(eastBox, BorderLayout.EAST);
 
         // 添加主面板到框架
         add(mainPanel);
