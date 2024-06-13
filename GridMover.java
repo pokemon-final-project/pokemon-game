@@ -15,7 +15,7 @@ public class GridMover extends JPanel {
         setFocusable(true);
 
         addKeyListener(new KeyAdapter() {
-            @Override
+            @Override 
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_UP:
