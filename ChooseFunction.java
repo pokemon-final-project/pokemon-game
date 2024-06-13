@@ -11,7 +11,7 @@ import javax.swing.border.LineBorder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridMover extends JPanel {
+public class ChooseFunction extends JPanel {
     private static final int GRID_SIZE = 10;
     private static final int CELL_SIZE = 50;
     private int pointX = 0;
@@ -19,7 +19,7 @@ public class GridMover extends JPanel {
     private List<BufferedImage> imageList;
         // private BufferedImage image;
 
-    public GridMover() {
+    public ChooseFunction() {
         setPreferredSize(new Dimension(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE));
         setBackground(Color.WHITE);
         setFocusable(true);
@@ -52,6 +52,10 @@ public class GridMover extends JPanel {
                     case KeyEvent.VK_RIGHT:
                         if (pointX < GRID_SIZE - 1) pointX++;
                         break;
+                    case KeyEvent.VK_ENTER:
+                        int index = pointY * GRID_SIZE + pointX;
+                        
+                        break;
                 }
                 repaint();
             }
@@ -68,12 +72,14 @@ public class GridMover extends JPanel {
                 g.drawRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 //加載圖片
                 if (imageList.get(0) != null) {
-                    g2d.drawImage(imageList.get(0), pointX * CELL_SIZE, pointY * CELL_SIZE, CELL_SIZE, CELL_SIZE, null);
+                    g2d.drawImage(imageList.get(0), i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE, null);
                 }else{
                     System.out.println("NO image");
                 }
             }
         }
+
+        //畫邊界
         setCellBorder(g2d, pointX * CELL_SIZE, pointY * CELL_SIZE, Color.RED);
         // g.setColor(Color.BLUE);
         // g.fillOval(pointX * CELL_SIZE, pointY * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -86,7 +92,7 @@ public class GridMover extends JPanel {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Grid Mover");
-        GridMover gridMover = new GridMover();
+        ChooseFunction gridMover = new ChooseFunction();
         frame.add(gridMover);
         frame.pack();
         frame.setTitle("Pokemon Final");
