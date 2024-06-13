@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.border.LineBorder;
 
 public class GridMover extends JPanel {
     private static final int GRID_SIZE = 10;
@@ -44,8 +45,15 @@ public class GridMover extends JPanel {
                 g.drawRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
             }
         }
-        g.setColor(Color.RED);
+        Graphics2D g2d = (Graphics2D) g;
+        setCellBorder(g2d, pointX * CELL_SIZE, pointY * CELL_SIZE, Color.RED);
+        g.setColor(Color.BLUE);
         g.fillOval(pointX * CELL_SIZE, pointY * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    }
+
+    private void setCellBorder(Graphics2D g2d, int x, int y, Color color) {
+        g2d.setColor(color);
+        g2d.drawRect(x, y, CELL_SIZE, CELL_SIZE);
     }
 
     public static void main(String[] args) {
@@ -53,6 +61,7 @@ public class GridMover extends JPanel {
         GridMover gridMover = new GridMover();
         frame.add(gridMover);
         frame.pack();
+        frame.setTitle("Pokemon Final");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
