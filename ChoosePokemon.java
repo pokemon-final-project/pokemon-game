@@ -96,7 +96,6 @@ public class ChoosePokemon extends JFrame {
                     // Reset border after a delay
                     // console.log(i);
                     
-                    chosenPokemonIds.add(index);
                     System.out.println(index);
                     System.out.println(chosenPokemonIds);
                     
@@ -104,18 +103,19 @@ public class ChoosePokemon extends JFrame {
                     timer.setRepeats(false);
                     timer.start();
                     //加入Pokemon
-                    chosenBox2.removeAll();
-                    for(int i = 0; i<chosenPokemonIds.size();i++){
-                        if(chosenPokemonIds.size() <=0){
-                            break;
+                    if(chosenPokemonIds.size() >= 0 && chosenPokemonIds.size() < 6){
+                        chosenPokemonIds.add(index);
+                        chosenBox2.removeAll();
+                        for(int i = 0; i<chosenPokemonIds.size();i++){
+                            ImageIcon icon = new ImageIcon("pokemon-data/image/"+chosenPokemonIds.get(i)+".png");
+                            Image image = icon.getImage(); // Transform it
+                            Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // Scale it the smooth way
+                            icon = new ImageIcon(newimg);  // Transform it back
+                            JLabel label = new JLabel(icon);
+                            chosenBox2.add(label,gbc);
                         }
-                        
-                        ImageIcon icon = new ImageIcon("pokemon-data/image/"+chosenPokemonIds.get(i)+".png");
-                        Image image = icon.getImage(); // Transform it
-                        Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // Scale it the smooth way
-                        icon = new ImageIcon(newimg);  // Transform it back
-                        JLabel label = new JLabel(icon);
-                        chosenBox2.add(label,gbc);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Pokemon數量已逹上限" );
                     }
                     repaint(); //刷新頁面
                 }
