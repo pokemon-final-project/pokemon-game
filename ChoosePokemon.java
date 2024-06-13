@@ -124,6 +124,7 @@ public class ChoosePokemon extends JFrame {
                 public void mouseEntered(MouseEvent e) {
                     JLabel enteredLabel = (JLabel) e.getSource();
                     enteredLabel.setBorder(new LineBorder(Color.RED));
+                    repaint();
                 }
 
                 @Override
