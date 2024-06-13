@@ -34,7 +34,7 @@ public class ChoosePokemon extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 5, 10, 5);    
 
-        for(int i=0; i<30;i++){
+        for(int i=1; i<31;i++){
             ImageIcon icon = new ImageIcon("pokemon-data/image/"+i+".png");
             Image image = icon.getImage(); // Transform it
             Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH); // Scale it the smooth way
