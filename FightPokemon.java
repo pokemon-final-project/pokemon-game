@@ -162,19 +162,6 @@ public class FightPokemon extends JFrame {
         westBox.setBorder(BorderFactory.createTitledBorder("所有 Pokemon"));
         westBox.setPreferredSize(new Dimension(600, 1000));
 
-        //準備確定
-        // JButton submitButton = new JButton("準備確定");
-        // submitButton.setPreferredSize(new Dimension(1200, 100));
-        // submitButton.setFont(new Font("Serif", Font.PLAIN, 20));
-        // submitButton.addMouseListener(new MouseAdapter() {
-        //     @Override
-        //     public void mouseClicked(MouseEvent e) {
-        //         setSummit(1); // 通過方法設置 summit 狀態
-        //         mainPanel.removeAll();
-        //         repaint();
-        //     }
-        // });
-
         // 加到面板到主面板
         mainPanel.add(northBox, BorderLayout.NORTH);
         // mainPanel.add(submitButton, BorderLayout.SOUTH);
