@@ -15,14 +15,14 @@ public class FightPokemon extends JFrame {
     private List<Pokemon> pokemonList;
     private PropertyChangeSupport support;
     private int round = 1;
-    private int operationMode = 1;
+    public int operationMode = 1;
 
     public List<Pokemon> player1List;
     public Pokemon player1Current;
 
     public List<Pokemon> player2List;
     public Pokemon player2Current;
-
+    private JLabel box1; 
     public FightPokemon(List<Pokemon> player1List,List<Pokemon> player2List) {
         player1Current = player1List.get(0);
         player2Current = player2List.get(0);
@@ -54,7 +54,7 @@ public class FightPokemon extends JFrame {
         container.setBorder(new LineBorder(Color.cyan, 2));
 
         // 回合顯示
-        JLabel box1 = new JLabel("player1回合", SwingConstants.CENTER);
+        box1 = new JLabel("player1回合", SwingConstants.CENTER);
         updateRoundLabel(box1);
         box1.setPreferredSize(new Dimension(1200, 90));
         // box1.setBorder(new LineBorder(Color.BLACK, 2));
@@ -62,21 +62,36 @@ public class FightPokemon extends JFrame {
         // 對戰界面
         JPanel box2 = new JPanel(new GridLayout(1, 2));
         box2.setPreferredSize(new Dimension(1200, 500));
+        
+
+        //玩家1
         JPanel subbox1 = new JPanel(new GridLayout(2, 1));
         JLabel HP = new JLabel("HP:"+player1Current.HP, SwingConstants.CENTER);
+        HP.setPreferredSize(new Dimension(200,100));
         subbox1.add(HP);
-
         ImageIcon icon = new ImageIcon("pokemon-data/image/" + player1Current.id + ".png");
         Image image = icon.getImage();
-        Image newimg = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         icon = new ImageIcon(newimg);
         JLabel label = new JLabel(icon);
         subbox1.add(label);
-
-        
         subbox1.setBorder(new LineBorder(Color.BLACK, 2));
+
+        //玩家2
         JPanel subbox2 = new JPanel(new GridLayout(2, 1));
+        HP = new JLabel("HP:"+player2Current.HP, SwingConstants.CENTER);
+        HP.setPreferredSize(new Dimension(200,100));
+        subbox2.add(HP);
+        icon = new ImageIcon("pokemon-data/image/" + player2Current.id + ".png");
+        image = icon.getImage();
+        newimg = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newimg);
+        label = new JLabel(icon);
+        subbox2.add(label);
         subbox2.setBorder(new LineBorder(Color.BLACK, 2));
+
+
+
         box2.add(subbox1);
         box2.add(subbox2);
 
@@ -111,7 +126,11 @@ public class FightPokemon extends JFrame {
                     selectedLabel.setBorder(new LineBorder(Color.BLACK, 6));
                     operationMode = 1;
                     operationBox1.removeAll();
-                    updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
+                    if(round == 1){
+                        updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
+                    }else{
+                        updateOperationMode(operationMode,operationBox1,player2List, subbox1, subbox2);                        
+                    }
                     repaint();
                 }
 
@@ -213,6 +232,7 @@ public class FightPokemon extends JFrame {
         switch (operationMode) {
             case 1:
                 // JPanel operationBox1 = new JPanel(new GridLayout(2, 2));
+                operationBox1.removeAll();
                 operationBox1.setBorder(new LineBorder(Color.BLACK, 2));
                 JLabel label1 = new JLabel("技能1", SwingConstants.CENTER);
                 operationBox1.add(label1);
@@ -243,12 +263,17 @@ public class FightPokemon extends JFrame {
                             selectedLabel.setBorder(new LineBorder(Color.BLACK, 6));
                             if(round == 1){
                                 player1Current = playerList.get(index);
+                                updatePlayer1Current(subbox1,subbox2,operationBox1);
+                                round = 2;
+                                updateRoundLabel(box1);
                             }else{
                                 player2Current = playerList.get(index);
+                                updatePlayer2Current(subbox1, subbox2, operationBox1);
+                                round = 1;
+                                updateRoundLabel(box1);
                             }
                             // System.out.println(player1Current);
                             // System.out.println(player2Current);
-                            updatePlayer1Current(subbox1);
                             repaint();
                         }
                         
@@ -270,20 +295,38 @@ public class FightPokemon extends JFrame {
                 }
                 break;
             default:
+                repaint();
                 break;
         }
     }
     
-    public void updatePlayer1Current(JPanel subbox1){
+    public void updatePlayer1Current(JPanel subbox1,JPanel subbox2,JPanel operationBox1){
         subbox1.removeAll();
         JLabel HP = new JLabel("HP:"+player1Current.HP, SwingConstants.CENTER);
         subbox1.add(HP);
         ImageIcon icon = new ImageIcon("pokemon-data/image/" + player1Current.id + ".png");
         Image image = icon.getImage();
-        Image newimg = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
         icon = new ImageIcon(newimg);
         JLabel label = new JLabel(icon);
         subbox1.add(label);
+        operationMode = 1;
+        updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
+        repaint();
+    }
+
+    public void updatePlayer2Current(JPanel subbox1,JPanel subbox2,JPanel operationBox1){
+        subbox2.removeAll();
+        JLabel HP = new JLabel("HP:"+player2Current.HP, SwingConstants.CENTER);
+        subbox2.add(HP);
+        ImageIcon icon = new ImageIcon("pokemon-data/image/" + player2Current.id + ".png");
+        Image image = icon.getImage();
+        Image newimg = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newimg);
+        JLabel label = new JLabel(icon);
+        subbox2.add(label);
+        operationMode = 1; 
+        updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
         repaint();
     }
 
@@ -292,25 +335,8 @@ public class FightPokemon extends JFrame {
     }
 
 
-
     // public static void main(String[] args) {
     //     SwingUtilities.invokeLater(() -> new FightPokemon(List.of(1, 2, 3, 4, 5, 6)));
     // }
 }
 
-// actionLabel1.addMouseListener(new MouseAdapter() {
-//     @Override
-//     public void mouseClicked(MouseEvent e) {
-//         repaint();
-//     }
-
-//     @Override
-//     public void mouseEntered(MouseEvent e) {
-//         repaint();
-//     }
-
-//     @Override
-//     public void mouseExited(MouseEvent e) {
-//         repaint();
-//     }
-// });
