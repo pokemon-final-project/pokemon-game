@@ -30,14 +30,14 @@ class Pokemon implements Serializable {
     private static final long serialVersionUID = 1L;
     int id;
     String name;
-    int blood;
+    int HP;
     String attribute;
     List<PokemonAbility> abilities;
 
-    public Pokemon(int id, String name, int blood, String attribute, List<PokemonAbility> abilities) {
+    public Pokemon(int id, String name, int HP, String attribute, List<PokemonAbility> abilities) {
         this.id = id;
         this.name = name;
-        this.blood = blood;
+        this.HP = HP;
         this.attribute = attribute;
         this.abilities = abilities;
     }
@@ -47,7 +47,7 @@ class Pokemon implements Serializable {
         return "Pokemon{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", blood=" + blood +
+                ", HP=" + HP +
                 ", attribute='" + attribute + '\'' +
                 ", abilities=" + abilities +
                 '}';

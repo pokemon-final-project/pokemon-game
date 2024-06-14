@@ -32,14 +32,14 @@ class Pokemon implements Serializable {
     private static final long serialVersionUID = 1L;
     int id;
     String name;
-    int blood;
+    int HP;
     String attribute;
     List<PokemonAbility> abilities;
 
-    public Pokemon(int id, String name, int blood, String attribute, List<PokemonAbility> abilities) {
+    public Pokemon(int id, String name, int HP, String attribute, List<PokemonAbility> abilities) {
         this.id = id;
         this.name = name;
-        this.blood = blood;
+        this.HP = HP;
         this.attribute = attribute;
         this.abilities = abilities;
     }
@@ -49,7 +49,7 @@ class Pokemon implements Serializable {
         return "Pokemon{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", blood=" + blood +
+                ", HP=" + HP +
                 ", attribute='" + attribute + '\'' +
                 ", abilities=" + abilities +
                 '}';
@@ -60,7 +60,7 @@ public class SerializePokemonData {
     public static void main(String[] args) {
         // Create a list of Pokemon
         List<Pokemon> pokemonList = new ArrayList<>();
-        String[] names = {"小火龍", "妙蛙種子", "傑尼龜", "皮卡丘", "胖丁", "霸王花", "噴火龍", "水箭龜", "雷丘", "胖可丁", "可拉可拉", "沙瓦郎", "卡比獸", "拉普拉斯", "伊布", "火伊布", "雷伊布", "水伊布", "太陽伊布", "月亮伊布", "艾路雷朵", "波克基斯", "飛天螳螂", "快龍", "迷你龍", "哈克龍", "頑皮彈", "魔牆人偶", "寶石海星", "拉帝歐斯"};
+        String[] names = { "妙蛙種子", "霸王花","小火龍",  "噴火龍", "水箭龜","傑尼龜", "皮卡丘", "胖丁", "雷丘", "胖可丁", "可拉可拉", "沙瓦郎", "卡比獸", "拉普拉斯", "伊布", "火伊布", "雷伊布", "水伊布", "太陽伊布", "月亮伊布", "艾路雷朵", "波克基斯", "飛天螳螂", "快龍", "迷你龍", "哈克龍", "頑皮彈", "魔牆人偶", "寶石海星", "拉帝歐斯"};
         String[] attributes = {"fire", "grass", "water", "electric", "fairy", "grass", "fire", "water", "electric", "fairy", "ground", "fighting", "normal", "water", "normal", "fire", "electric", "water", "psychic", "dark", "psychic", "fairy", "bug", "dragon", "dragon", "dragon", "electric", "psychic", "water", "dragon"};
         
         Random random = new Random();
@@ -75,7 +75,7 @@ public class SerializePokemonData {
 
         // Serialize the Pokemon list to a file
         try (FileOutputStream fos = new FileOutputStream("pokemon_data.ser");
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(pokemonList);
             System.out.println("Successfully serialized Pokemon data to file.");
         } catch (IOException e) {
