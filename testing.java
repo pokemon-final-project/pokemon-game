@@ -11,7 +11,7 @@ import javax.swing.border.LineBorder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseFunction extends JPanel {
+public class testing extends JPanel {
     private static final int GRID_SIZE = 10;
     private static final int CELL_SIZE = 50;
     private int pointX = 0;
@@ -19,7 +19,7 @@ public class ChooseFunction extends JPanel {
     private List<BufferedImage> imageList;
         // private BufferedImage image;
 
-    public ChooseFunction() {
+    public testing() {
         setPreferredSize(new Dimension(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE));
         setBackground(Color.WHITE);
         setFocusable(true);
@@ -92,7 +92,7 @@ public class ChooseFunction extends JPanel {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Grid Mover");
-        ChooseFunction gridMover = new ChooseFunction();
+        testing gridMover = new testing();
         frame.add(gridMover);
         frame.pack();
         frame.setTitle("Pokemon Final");
