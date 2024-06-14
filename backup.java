@@ -19,22 +19,15 @@ public class FightPokemon extends JFrame {
 
     public List<Pokemon> player1List;
     public Pokemon player1Current;
-    private int player1DeadAmount;
 
     public List<Pokemon> player2List;
     public Pokemon player2Current;
-    private int player2DeadAmount;
-    
-
     private JLabel box1; 
     public FightPokemon(List<Pokemon> player1List,List<Pokemon> player2List) {
         this.player1List = player1List;
         this.player2List = player2List;
         player1Current = player1List.get(0);
         player2Current = player2List.get(0);
-        player1DeadAmount = 0;
-        player2DeadAmount = 0;
-    
 
         support = new PropertyChangeSupport(this);
         // System.out.println(player1List);
@@ -256,6 +249,7 @@ public class FightPokemon extends JFrame {
         switch (operationMode) {
             case 0:
                 checkCurrentPokemonDie(player1Current, subbox1, subbox2, operationBox1);
+                updateOperationMode(3, operationBox1, playerList, subbox1, subbox2);
                 operationBox1.removeAll();
             case 1:
                 // JPanel operationBox1 = new JPanel(new GridLayout(2, 2));
@@ -268,9 +262,7 @@ public class FightPokemon extends JFrame {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 player2Current.HP = player2Current.HP - player1Current.abilities.get(index).damage;
-                                checkCurrentPokemonDie(player2Current, subbox1, subbox2, operationBox1);
                                 round = 2;
-                                // checkCurrentPokemonDie(player1Current, subbox1, subbox2, operationBox1);
                                 updatePlayer2Current(subbox1, subbox2, operationBox1);
                                 updateRoundLabel(box1);
                                 repaint();
@@ -298,9 +290,7 @@ public class FightPokemon extends JFrame {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 player1Current.HP = player1Current.HP - player2Current.abilities.get(index).damage;
-                                checkCurrentPokemonDie(player1Current, subbox1, subbox2, operationBox1);
                                 round = 1;
-                                // checkCurrentPokemonDie(player2Current, subbox1, subbox2, operationBox1);
                                 updatePlayer1Current(subbox1, subbox2, operationBox1);
                                 updateRoundLabel(box1);
                                 repaint();
@@ -398,7 +388,7 @@ public class FightPokemon extends JFrame {
         icon = new ImageIcon(newimg);
         JLabel label = new JLabel(icon);
         subbox1.add(label);
-        operationMode = 1;
+        operationMode = 0;
         updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
         repaint();
     }
@@ -420,41 +410,21 @@ public class FightPokemon extends JFrame {
         icon = new ImageIcon(newimg);
         JLabel label = new JLabel(icon);
         subbox2.add(label);
-        operationMode = 1; 
+        operationMode = 0; 
         updateOperationMode(operationMode,operationBox1,player2List, subbox1, subbox2);
         repaint();
     }
 
     public void checkCurrentPokemonDie(Pokemon CurrentPokemon,JPanel subbox1,JPanel subbox2,JPanel operationBox1){
-        //當前pokemon陣亡後自動更換List中第二隻Pokemon
         if(CurrentPokemon.HP <= 0){
+            //讓被攻擊玩家選擇別的寶可夢
             operationMode = 3;
-            // System.out.println(player1List);
-            operationBox1.removeAll();
-            player1DeadAmount += 1;
-            if(round == 2){
-                for(int i=0;i<player1List.size();i++){
-                    if(player1List.get(i).HP > 0){
-                        player1Current = player1List.get(i);                
-                        break;
-                    }
-                }
-                if(player1DeadAmount >=player1List.size()){
-                    JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝負");
-                }
-                updatePlayer1Current(subbox1, subbox2, operationBox1);
+            System.out.println(player1List);
+            if(round == 1 ){
+                System.out.println("change");
+                updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
             }else{
-                player2DeadAmount += 1;
-                for(int i=0;i<player2List.size();i++){
-                    if(player2List.get(i).HP > 0){
-                        player2Current = player2List.get(i);
-                        break;
-                    }
-                }
-                if(player2DeadAmount >= player2List.size()){
-                    JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝負");
-                }
-                updatePlayer2Current(subbox1, subbox2, operationBox1);
+                updateOperationMode(operationMode,operationBox1,player2List, subbox1, subbox2);
             }
             repaint();
         }
