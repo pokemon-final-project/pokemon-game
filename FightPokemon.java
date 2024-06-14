@@ -15,7 +15,7 @@ public class FightPokemon extends JFrame {
     private List<Pokemon> pokemonList;
     private PropertyChangeSupport support;
     private int round = 1;
-    public int operationMode = 1;
+    public int operationMode = 0;
 
     public List<Pokemon> player1List;
     public Pokemon player1Current;
@@ -59,6 +59,8 @@ public class FightPokemon extends JFrame {
         box1.setPreferredSize(new Dimension(1200, 90));
         // box1.setBorder(new LineBorder(Color.BLACK, 2));
 
+
+
         // 對戰界面
         JPanel box2 = new JPanel(new GridLayout(1, 2));
         box2.setPreferredSize(new Dimension(1200, 500));
@@ -99,17 +101,29 @@ public class FightPokemon extends JFrame {
         JPanel box3 = new JPanel(new GridLayout(1, 2));
         box3.setPreferredSize(new Dimension(1200, 300));
 
+        JPanel operationBox1Border = new JPanel();
+        operationBox1Border.setLayout(new BorderLayout());
+        operationBox1Border.setBorder(new LineBorder(Color.BLACK, 2));
         JPanel operationBox1 = new JPanel(new GridLayout(2, 2));
-        operationBox1.setBorder(new LineBorder(Color.BLACK, 2));
-        JLabel label1 = new JLabel("技能1", SwingConstants.CENTER);
-        operationBox1.add(label1);
-        JLabel label2 = new JLabel("技能2", SwingConstants.CENTER);
-        operationBox1.add(label2);
-        JLabel label3 = new JLabel("技能3", SwingConstants.CENTER);
-        operationBox1.add(label3);
-        JLabel label4 = new JLabel("技能4", SwingConstants.CENTER);
-        operationBox1.add(label4);
+        operationBox1.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        operationBox1Border.add(operationBox1);
+        for(int i=0;i<4;i++){
+            JLabel ability = new JLabel(player1Current.abilities.get(i).name, SwingConstants.CENTER);
+            operationBox1.add(ability);
+        }
         
+
+        // JLabel label1 = new JLabel("技能1", SwingConstants.CENTER);
+        // operationBox1.add(label1);
+        // JLabel label2 = new JLabel("技能2", SwingConstants.CENTER);
+        // operationBox1.add(label2);
+        // JLabel label3 = new JLabel("技能3", SwingConstants.CENTER);
+        // operationBox1.add(label3);
+        // JLabel label4 = new JLabel("技能4", SwingConstants.CENTER);
+        // operationBox1.add(label4);
+        
+
+
         JPanel operationBox2Border = new JPanel();
         operationBox2Border.setLayout(new BorderLayout());
         operationBox2Border.setBorder(new LineBorder(Color.BLACK, 2));
@@ -201,7 +215,7 @@ public class FightPokemon extends JFrame {
         operationBox2.add(actionLabel4);
 
         operationBox2Border.add(operationBox2, BorderLayout.CENTER);
-        box3.add(operationBox1);
+        box3.add(operationBox1Border);
         box3.add(operationBox2Border);
 
         container.add(box1);
@@ -230,18 +244,70 @@ public class FightPokemon extends JFrame {
 
     private void updateOperationMode(int operationMode, JPanel operationBox1, List<Pokemon> playerList, JPanel subbox1, JPanel subbox2){
         switch (operationMode) {
+            case 0:
+                operationBox1.removeAll();
             case 1:
                 // JPanel operationBox1 = new JPanel(new GridLayout(2, 2));
                 operationBox1.removeAll();
-                operationBox1.setBorder(new LineBorder(Color.BLACK, 2));
-                JLabel label1 = new JLabel("技能1", SwingConstants.CENTER);
-                operationBox1.add(label1);
-                JLabel label2 = new JLabel("技能2", SwingConstants.CENTER);
-                operationBox1.add(label2);
-                JLabel label3 = new JLabel("技能3", SwingConstants.CENTER);
-                operationBox1.add(label3);
-                JLabel label4 = new JLabel("技能4", SwingConstants.CENTER);
-                operationBox1.add(label4);
+                for(int i=0;i<4;i++){
+                    int index = 1;
+                    if(round == 1){
+                        JLabel ability = new JLabel(player1Current.abilities.get(i).name, SwingConstants.CENTER);
+                        ability.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                player2Current.HP = player2Current.HP - player1Current.abilities.get(index).damage;
+                                round = 2;
+                                updatePlayer2Current(subbox1, subbox2, operationBox1);
+                                updateRoundLabel(box1);
+                                repaint();
+                            }
+                            
+                            @Override
+                            public void mouseEntered(MouseEvent e) {
+                                JLabel enteredLabel = (JLabel) e.getSource();
+                                enteredLabel.setBorder(new LineBorder(Color.RED));
+                                repaint();
+                            }
+            
+                            @Override
+                            public void mouseExited(MouseEvent e) {
+                                JLabel exitedLabel = (JLabel) e.getSource();
+                                exitedLabel.setBorder(null);
+                                repaint();
+                            }
+                        });
+                        operationBox1.add(ability);
+                        
+                    }else{
+                        JLabel ability = new JLabel(player2Current.abilities.get(i).name, SwingConstants.CENTER);
+                        ability.addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent e) {
+                                player1Current.HP = player1Current.HP - player2Current.abilities.get(index).damage;
+                                round = 1;
+                                updatePlayer1Current(subbox1, subbox2, operationBox1);
+                                updateRoundLabel(box1);
+                                repaint();
+                            }
+                            
+                            @Override
+                            public void mouseEntered(MouseEvent e) {
+                                JLabel enteredLabel = (JLabel) e.getSource();
+                                enteredLabel.setBorder(new LineBorder(Color.RED));
+                                repaint();
+                            }
+            
+                            @Override
+                            public void mouseExited(MouseEvent e) {
+                                JLabel exitedLabel = (JLabel) e.getSource();
+                                exitedLabel.setBorder(null);
+                                repaint();
+                            }
+                        });
+                        operationBox1.add(ability);
+                    }
+                }
                 break;
             case 2:
                 // JPanel operationBox1 = new JPanel(new GridLayout(2, 2));
@@ -310,7 +376,7 @@ public class FightPokemon extends JFrame {
         icon = new ImageIcon(newimg);
         JLabel label = new JLabel(icon);
         subbox1.add(label);
-        operationMode = 1;
+        operationMode = 0;
         updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
         repaint();
     }
@@ -325,7 +391,7 @@ public class FightPokemon extends JFrame {
         icon = new ImageIcon(newimg);
         JLabel label = new JLabel(icon);
         subbox2.add(label);
-        operationMode = 1; 
+        operationMode = 0; 
         updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
         repaint();
     }
