@@ -9,8 +9,10 @@ public class Main {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if ("summit".equals(evt.getPropertyName()) && (int) evt.getNewValue() == 1) {
+                    System.out.println(choosePokemon.chosenPokemonIds);
+                    FightPokemon fightPokemon = new FightPokemon(choosePokemon.chosenPokemonIds);
                     choosePokemon.dispose();
-                    FightPokemon fightPokemon = new FightPokemon();
+                    
                     System.out.println("寶可夢選擇已確認");
                     // 在這裡處理確認後的操作
                 }

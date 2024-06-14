@@ -15,7 +15,7 @@ public class ChoosePokemon extends JFrame {
     private List<JLabel> pokemonLabels;
     private JPanel chosenPanel;
     private int currentPokemonId;
-    private List<Integer> chosenPokemonIds;
+    public List<Integer> chosenPokemonIds;
     List<Pokemon> pokemonList;
     private int summit = 0; // 修改為實例變量
     private PropertyChangeSupport support;
@@ -98,6 +98,7 @@ public class ChoosePokemon extends JFrame {
                     
                     if (chosenPokemonIds.size() >= 0 && chosenPokemonIds.size() < 6) {
                         chosenPokemonIds.add(index);
+                        System.out.println(chosenPokemonIds);
                         chosenBox2.removeAll();
                         for (int i = 0; i < chosenPokemonIds.size(); i++) {
                             ImageIcon icon = new ImageIcon("pokemon-data/image/" + chosenPokemonIds.get(i) + ".png");
@@ -180,7 +181,7 @@ public class ChoosePokemon extends JFrame {
         mainPanel.add(submitButton, BorderLayout.SOUTH);
         mainPanel.add(westBox, BorderLayout.WEST);
         mainPanel.add(eastBox, BorderLayout.EAST);
-
+        // mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50)); // 設置外邊距
         // 添加主面板到框架
         add(mainPanel);
 
