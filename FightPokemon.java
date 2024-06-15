@@ -452,7 +452,7 @@ public class FightPokemon extends JFrame {
                     }
                 }
                 if(player2DeadAmount >= player2List.size()){
-                    JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝負");
+                    JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝");
                 }
                 updatePlayer2Current(subbox1, subbox2, operationBox1);
             }
