@@ -14,7 +14,7 @@
 ### User Interface
 - **Main Menu:** 初始的登入介面，會詢問你是否滿18歲，但不論按哪個都可以進入
 - **Pokemon Selection:** 寶可夢選擇介面，左邊為16種寶可夢，雙方玩家可以各自挑選6隻，可以重複選同一隻，最下面的按鈕即是開戰
-- **Pokemon Fight Screen:** 戰鬥的介面，
+- **Pokemon Fight Screen:** 戰鬥的介面，可以選擇攻擊，技能或道具
 
 
 ## Technical Documentation

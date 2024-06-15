@@ -19,7 +19,7 @@ public class Main {
                     FightPokemon fightPokemon = new FightPokemon(initialPlayerPokemon.player1List,initialPlayerPokemon.player2List);
                     choosePokemon.dispose();
                     
-                    System.out.println("寶可夢選擇已確認");
+                    System.out.println("寶可夢選擇已確認"); 
                     // 在這裡處理確認後的操作
                 }
             }
