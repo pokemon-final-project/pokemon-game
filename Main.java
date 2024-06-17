@@ -4,7 +4,7 @@ import java.beans.PropertyChangeListener;
 public class Main {
     public static void main(String[] args) {
         ChoosePokemon choosePokemon = new ChoosePokemon();
-
+        
         choosePokemon.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {

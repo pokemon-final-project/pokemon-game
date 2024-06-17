@@ -8,9 +8,9 @@ public class GameLogout extends JFrame {
     private ImageIcon gameOverImageIcon;
 
     public GameLogout() {
-        // 加載背景圖片
+        // 背景圖片
         backgroundImage = new ImageIcon("pokemon-data/image/" + "pokemon-background" + ".jpeg").getImage();
-        // 加載遊戲結束圖片，並縮小尺寸
+        // 按鈕圖片 縮小尺寸
         ImageIcon originalIcon = new ImageIcon("pokemon-data/image/" + "game-ending" + ".png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(400, 170, Image.SCALE_SMOOTH);
         gameOverImageIcon = new ImageIcon(scaledImage);
