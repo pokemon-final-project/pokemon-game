@@ -11,11 +11,10 @@ public class Main {
                 if ("summit".equals(evt.getPropertyName()) && (int) evt.getNewValue() == 1) {
                     System.out.println(choosePokemon.player1PokemonId);
                     InitialPlayerPokemon initialPlayerPokemon = new InitialPlayerPokemon(choosePokemon.player1PokemonId,choosePokemon.player2PokemonId);
-
-                    System.out.println("player1");
-                    System.out.println(initialPlayerPokemon.player1List);
-                    System.out.println("player2");
-                    System.out.println(initialPlayerPokemon.player2List);
+                    // System.out.println("player1");
+                    // System.out.println(initialPlayerPokemon.player1List);
+                    // System.out.println("player2");
+                    // System.out.println(initialPlayerPokemon.player2List);
                     FightPokemon fightPokemon = new FightPokemon(initialPlayerPokemon.player1List,initialPlayerPokemon.player2List);
                     choosePokemon.dispose();
                     

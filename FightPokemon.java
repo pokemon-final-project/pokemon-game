@@ -17,12 +17,12 @@ public class FightPokemon extends JFrame {
     private int round = 1;
     public int operationMode = 0;
 
-    public List<Pokemon> player1List;
-    public Pokemon player1Current;
+    private List<Pokemon> player1List;
+    private Pokemon player1Current;
     private int player1DeadAmount;
 
-    public List<Pokemon> player2List;
-    public Pokemon player2Current;
+    private List<Pokemon> player2List;
+    private Pokemon player2Current;
     private int player2DeadAmount;
     
 

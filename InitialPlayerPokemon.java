@@ -35,14 +35,5 @@ public class InitialPlayerPokemon {
     }
 
     public static void main(String[] args) {
-        // List<Integer> player2PokemonId = new ArrayList<>();
-        // player1PokemonId.add(1);
-        // player1PokemonId.add(2);
-        // player1PokemonId.add(3);
-        // player1PokemonId.add(4);
-        // player1PokemonId.add(5);
-        // player1PokemonId.add(6);
-        // InitialPlayerPokemon initialPlayerPokemon = new InitialPlayerPokemon(player1PokemonId);
-        // System.out.println(pokemonList);
     }
 }
