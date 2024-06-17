@@ -40,7 +40,7 @@ class Pokemon implements Serializable {
     //     this.HP = HP;
     //     this.attribute = attribute;
     //     this.abilities = abilities;
-    }
+    // }
 
     @Override
     public String toString() {
