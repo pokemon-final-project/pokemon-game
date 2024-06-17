@@ -458,6 +458,7 @@ public class FightPokemon extends JFrame {
                 }
                 if(player1DeadAmount >=player1List.size()){
                     JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝負");
+                    dispose();
                     GameLogout gameLogout = new GameLogout();
                 }
                 updatePlayer1Current(subbox1, subbox2, operationBox1);

@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+
+
 
 public class GameLogout extends JFrame {
     private Image backgroundImage;
@@ -44,7 +48,12 @@ public class GameLogout extends JFrame {
 
         // 創建遊戲結束圖片標籤
         JLabel gameOverImageLabel = new JLabel(gameOverImageIcon);
-
+        gameOverImageLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+            }
+        });
         // 使用 JLayeredPane 作為按鈕和背景圖片的容器
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(gameOverImageIcon.getIconWidth(), gameOverImageIcon.getIconHeight()));
@@ -53,8 +62,8 @@ public class GameLogout extends JFrame {
         gameOverImageLabel.setBounds(0, 0, gameOverImageIcon.getIconWidth(), gameOverImageIcon.getIconHeight());
         layeredPane.add(gameOverImageLabel, JLayeredPane.DEFAULT_LAYER);
 
-         centerPanel.add(layeredPane, gbc);
-         mainPanel.add(centerPanel, BorderLayout.CENTER);
+        centerPanel.add(layeredPane, gbc);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
 
         // 添加主面板到框架
         add(mainPanel);
@@ -68,8 +77,8 @@ public class GameLogout extends JFrame {
         new GameLogin(); // 假設 GameLogin 是遊戲的啟動類
     }
 
-    // public static void main(String[] args) {
-    //     // 創建並顯示遊戲結束框架
-    //     SwingUtilities.invokeLater(() -> new GameLogout());
-    // }
+    public static void main(String[] args) {
+        // 創建並顯示遊戲結束框架
+        SwingUtilities.invokeLater(() -> new GameLogout());
+    }
 }
