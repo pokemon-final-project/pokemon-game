@@ -210,12 +210,8 @@ public class ChoosePokemon extends JFrame {
         submitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(player1PokemonId.size() <= 0){
-                    JOptionPane.showMessageDialog(null, "不能自己上場!");
-                    return;
-                }
                 if (round == 1) {
-                    if(player2PokemonId.size() <= 0){
+                    if(player1PokemonId.size() <= 0){
                         JOptionPane.showMessageDialog(null, "不能自己上場!");
                         return;
                     }
@@ -225,7 +221,10 @@ public class ChoosePokemon extends JFrame {
                     chosenBox2.removeAll();
                     repaint();
                 } else {
-                    
+                    if(player2PokemonId.size() <= 0){
+                        JOptionPane.showMessageDialog(null, "不能自己上場!");
+                        return;
+                    }
                     setSummit(1); // 通過方法設置 summit 狀態
                     // mainPanel.removeAll();
                     // repaint();
