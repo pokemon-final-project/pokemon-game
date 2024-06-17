@@ -5,21 +5,24 @@ public class backupmain {
     public static void main(String[] args) {
         GameLogin login = new GameLogin();
         login.addPropertyChangeListener(new PropertyChangeListener() {
-            ChoosePokemon choosePokemon;
             public void propertyChange(PropertyChangeEvent evt){
                 if ("summit".equals(evt.getPropertyName()) && (int) evt.getNewValue() == 1) {
-                    choosePokemon = new ChoosePokemon();
+                    ChoosePokemon choosePokemon = new ChoosePokemon();
+                    login.dispose();
                     choosePokemon.addPropertyChangeListener(new PropertyChangeListener() {
                         @Override
                         public void propertyChange(PropertyChangeEvent evt) {
                             if ("summit".equals(evt.getPropertyName()) && (int) evt.getNewValue() == 1) {
-                                InitialPlayerPokemon initialPlayerPokemon = new InitialPlayerPokemon(login.choosePokemon.player1PokemonId,login.choosePokemon.player2PokemonId);
-                                System.out.println("testing");
+                                System.out.println(choosePokemon.player1PokemonId);
+                                InitialPlayerPokemon initialPlayerPokemon = new InitialPlayerPokemon(choosePokemon.player1PokemonId,choosePokemon.player2PokemonId);
+                                // System.out.println("player1");
                                 // System.out.println(initialPlayerPokemon.player1List);
                                 // System.out.println("player2");
                                 // System.out.println(initialPlayerPokemon.player2List);
                                 FightPokemon fightPokemon = new FightPokemon(initialPlayerPokemon.player1List,initialPlayerPokemon.player2List);
-                                login.dispose();
+                                choosePokemon.dispose();
+                                System.out.println("寶可夢選擇已確認"); 
+                                // 在這裡處理確認後的操作
                             }
                         }
                     });

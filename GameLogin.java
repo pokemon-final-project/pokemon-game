@@ -12,10 +12,10 @@ import java.beans.PropertyChangeSupport;
 public class GameLogin extends JFrame {
     private Image backgroundImage;
     private ImageIcon additionalImageIcon;
-    public ChoosePokemon choosePokemon;
     private PropertyChangeSupport support;
     private int summit = 0;
     public GameLogin() {
+        support = new PropertyChangeSupport(this);
         // 加載背景圖片
         backgroundImage = new ImageIcon("pokemon-data/image/" + "pokemon-background" + ".jpeg").getImage();
         // 加載額外圖片，並縮小尺寸
@@ -65,12 +65,13 @@ public class GameLogin extends JFrame {
         // 是按鈕
         JButton yesButton = new JButton("是");
         yesButton.setBounds(100, 80, 80, 30);
-        yesButton.addActionListener(new ActionListener() {
+        yesButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                choosePokemon = new ChoosePokemon();
+            public void mouseClicked(MouseEvent e) {
+                setSummit(1);
             }
         });
+
         layeredPane.add(yesButton, JLayeredPane.MODAL_LAYER);
 
         // 否按鈕
@@ -79,6 +80,7 @@ public class GameLogin extends JFrame {
         noButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, "還是可以玩啦");
                 setSummit(1);
             }
         });
@@ -108,6 +110,6 @@ public class GameLogin extends JFrame {
 
     public static void main(String[] args) {
         // 創建並顯示登錄框架
-        SwingUtilities.invokeLater(() -> new GameLogin());
+        SwingUtilities.invokeLater(() -> new Main());
     }
 }

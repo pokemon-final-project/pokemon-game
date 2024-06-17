@@ -76,11 +76,11 @@ public class GameLogout extends JFrame {
 
     private void restartGame() {
         dispose(); // 關閉當前窗口
-        new GameLogin(); // 假設 GameLogin 是遊戲的啟動類
+        Main main = new Main(); // 假設 GameLogin 是遊戲的啟動類
     }
 
-    public static void main(String[] args) {
-        // 創建並顯示遊戲結束框架
-        SwingUtilities.invokeLater(() -> new GameLogout());
-    }
+    // public static void main(String[] args) {
+    //     // 創建並顯示遊戲結束框架
+    //     SwingUtilities.invokeLater(() -> new GameLogout());
+    // }
 }

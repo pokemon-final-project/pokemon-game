@@ -344,7 +344,7 @@ public class FightPokemon extends JFrame {
                             selectedLabel.setBorder(new LineBorder(Color.BLACK, 6));
                             if(round == 1){
                                 
-                                //判量歸0的寶可夢不能出場
+                                //判量歸0的寶可夢不能出場   
                                 // System.out.println(playerList.get(index));
                                 if(playerList.get(index).HP > 0){
                                     player1Current = playerList.get(index);
@@ -454,6 +454,7 @@ public class FightPokemon extends JFrame {
                 }
                 if(player1DeadAmount >=player1List.size()){
                     JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝負");
+                    GameLogout gameLogout = new GameLogout();
                 }
                 updatePlayer1Current(subbox1, subbox2, operationBox1);
             }else{
@@ -465,7 +466,9 @@ public class FightPokemon extends JFrame {
                     }
                 }
                 if(player2DeadAmount >= player2List.size()){
-                    JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝");
+                    JOptionPane.showMessageDialog(null, "Player2死光了，Player1獲勝");
+                    dispose();
+                    GameLogout gameLogout = new GameLogout();
                 }
                 updatePlayer2Current(subbox1, subbox2, operationBox1);
             }
