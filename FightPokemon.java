@@ -440,12 +440,16 @@ public class FightPokemon extends JFrame {
 
     public void checkCurrentPokemonDie(Pokemon CurrentPokemon,JPanel subbox1,JPanel subbox2,JPanel operationBox1){
         //當前pokemon陣亡後自動更換List中第二隻Pokemon
+        System.out.println(player1DeadAmount);
+        System.out.println(player2DeadAmount);
+        System.out.println(player1List.size());
+        System.out.println(player2List.size());
         if(CurrentPokemon.HP <= 0){
             operationMode = 3;
             // System.out.println(player1List);
             operationBox1.removeAll();
-            player1DeadAmount += 1;
             if(round == 2){
+                player1DeadAmount += 1;
                 for(int i=0;i<player1List.size();i++){
                     if(player1List.get(i).HP > 0){
                         player1Current = player1List.get(i);                
