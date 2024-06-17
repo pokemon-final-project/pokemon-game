@@ -60,7 +60,7 @@ public class GameLogin extends JFrame {
         yesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startCharacterSelection();
+                new ChoosePokemon();
             }
         });
         layeredPane.add(yesButton, JLayeredPane.MODAL_LAYER);
@@ -72,7 +72,7 @@ public class GameLogin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "還是可以玩");
-                startCharacterSelection();
+                new ChoosePokemon();
             }
         });
         layeredPane.add(noButton, JLayeredPane.MODAL_LAYER);
@@ -85,11 +85,6 @@ public class GameLogin extends JFrame {
 
         // 設定框架可見
         setVisible(true);
-    }
-
-    private void startCharacterSelection() {
-        // 這裡可以添加選擇角色的代碼或打開選擇角色的界面
-        System.out.println("開始選角色");
     }
 
     public static void main(String[] args) {
