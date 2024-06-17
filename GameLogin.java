@@ -19,7 +19,7 @@ public class GameLogin extends JFrame {
         setTitle("Pokemon Login");
 
         // 設定框架的大小
-        setSize(1250, 1000 );
+        setSize(1300, 1000);
 
         // 設定預設關閉操作
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
