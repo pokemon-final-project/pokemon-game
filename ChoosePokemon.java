@@ -110,6 +110,9 @@ public class ChoosePokemon extends JFrame {
                     // 將兩個player的pokemon加進去arraylist, player1
                     if (round == 1) {
                         if (player1PokemonId.size() >= 0 && player1PokemonId.size() < 6) {
+                            if(!checkIfPokemonExist(index, player1PokemonId)){
+                                return;
+                            }
                             player1PokemonId.add(index);
                             player1Pokemon.add(pokemonList.get(index - 1));
                             System.out.println(player1PokemonId);
@@ -128,6 +131,9 @@ public class ChoosePokemon extends JFrame {
                         repaint();
                     } else { //player 2
                         if (player2PokemonId.size() >= 0 && player2PokemonId.size() < 6) {
+                            if(!checkIfPokemonExist(index, player2PokemonId)){
+                                return;
+                            }
                             player2PokemonId.add(index);
                             player2Pokemon.add(pokemonList.get(index - 1));
                             System.out.println(player2PokemonId);
@@ -232,7 +238,7 @@ public class ChoosePokemon extends JFrame {
         setVisible(true);
     }
 
-    
+
     private void updateNorthBoxLabel(JLabel label) {
         if (round == 1) {
             label.setText("Player1請選擇你的隊伍");
@@ -247,6 +253,17 @@ public class ChoosePokemon extends JFrame {
         } else {
             button.setText("Player2準備確定");
         }
+    }
+
+    //檢查保可夢是否重覆
+    private boolean checkIfPokemonExist(int index, List<Integer> playerPokemonId){
+        for(int i=0; i<playerPokemonId.size(); i++){
+            if(index == playerPokemonId.get(i)){
+                JOptionPane.showMessageDialog(null, "不能選重覆的!");
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setSummit(int summit) {
