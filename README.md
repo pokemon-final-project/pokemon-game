@@ -22,10 +22,11 @@
 ### Programming Languages and Tools
 - **Languages:** 由Java語言撰寫
 - **UI** 使用javax.swing製作
-- **Graphics:** 圖像參考網路上，連結提供在檔案最後面
+- **Graphics:** 圖像參考網路上，連結提供在頁面最後面
 
 ### Architecture
 - **GameLogin.java:** 登入介面
+- **GameLogout.java:** 登出介面
 - **ChoosePokemon.java:** 選擇寶可夢介面
 - **FightPokemon.java:** 寶可夢戰鬥介面
 - **Main.java:** 整個程式的entry
@@ -45,16 +46,15 @@
 
 ## Developer Notes
 
-### Bugs
-- Occasional frame rate drops in high-density areas.
-- Minor graphical glitches on certain hardware configurations.
+### Todo
+- 技能特效
 
 
 ### Contributions
-- **徐皓揚**
-- **謝卓熹**
-- **楊承曄**
-- **育成**
+- **徐皓揚** : 製作簡報, Documentation, ChoosePokemon.java
+- **謝卓熹** : 製作FightPokemon.java, 蒐集圖片資料
+- **楊承曄** : 製作登入登出介面GameLogin.java, GameLogout.java
+- **張育誠** : 製作寶可夢序列化程式SerializePokemon.java, DeserializePokemon.java
 
 
 ### Reference
