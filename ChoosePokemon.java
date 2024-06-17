@@ -15,12 +15,15 @@ import java.util.List;
 public class ChoosePokemon extends JFrame { 
     private int currentPokemonId;
     public List<Integer> chosenPokemonIds;
+    public FightPokemon fightpokemon;
     List<Pokemon> pokemonList; //紀錄序列化的寶可夢資料
     private int summit = 0;
     private PropertyChangeSupport support;
     private int round = 1; //round = 1玩家一 round = 2玩家二
     public List<Integer> player1PokemonId;
     public List<Integer> player2PokemonId;
+    public List<Pokemon> player1Pokemon;
+    public List<Pokemon> player2Pokemon;
 
     public ChoosePokemon() {
         support = new PropertyChangeSupport(this);
@@ -78,6 +81,8 @@ public class ChoosePokemon extends JFrame {
 
         player1PokemonId = new ArrayList<>();
         player2PokemonId = new ArrayList<>();
+        player1Pokemon = new ArrayList<>();
+        player2Pokemon = new ArrayList<>();
         chosenPokemonIds = new ArrayList<>();
 
         // WEST
@@ -106,6 +111,7 @@ public class ChoosePokemon extends JFrame {
                     if (round == 1) {
                         if (player1PokemonId.size() >= 0 && player1PokemonId.size() < 6) {
                             player1PokemonId.add(index);
+                            player1Pokemon.add(pokemonList.get(index - 1));
                             System.out.println(player1PokemonId);
                             chosenBox2.removeAll();
                             for (int i = 0; i < player1PokemonId.size(); i++) {
@@ -123,6 +129,7 @@ public class ChoosePokemon extends JFrame {
                     } else { //player 2
                         if (player2PokemonId.size() >= 0 && player2PokemonId.size() < 6) {
                             player2PokemonId.add(index);
+                            player2Pokemon.add(pokemonList.get(index - 1));
                             System.out.println(player2PokemonId);
                             chosenBox2.removeAll();
                             for (int i = 0; i < player2PokemonId.size(); i++) {
@@ -204,6 +211,7 @@ public class ChoosePokemon extends JFrame {
                     chosenBox2.removeAll();
                     repaint();
                 } else {
+                    
                     setSummit(1); // 通過方法設置 summit 狀態
                     // mainPanel.removeAll();
                     // repaint();
