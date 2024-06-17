@@ -343,6 +343,8 @@ public class FightPokemon extends JFrame {
                             JLabel selectedLabel = (JLabel) e.getSource();
                             selectedLabel.setBorder(new LineBorder(Color.BLACK, 6));
                             if(round == 1){
+                                
+                                //判量歸0的寶可夢不能出場
                                 // System.out.println(playerList.get(index));
                                 if(playerList.get(index).HP > 0){
                                     player1Current = playerList.get(index);
