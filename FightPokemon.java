@@ -489,9 +489,9 @@ public class FightPokemon extends JFrame {
 
     public void surrender(int round){
         if(round == 1){
-            JOptionPane.showMessageDialog(null, "player1是投降，player2獲勝");
+            JOptionPane.showMessageDialog(null, "player1投降，player2獲勝");
         }else{
-            JOptionPane.showMessageDialog(null, "player2是投降，player1獲勝");
+            JOptionPane.showMessageDialog(null, "player2投降，player1獲勝");
         }
         dispose();
         GameLogout gameLogout = new GameLogout();
