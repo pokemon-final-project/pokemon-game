@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+// _initialization
 public class ChoosePokemon extends JFrame { 
     private int currentPokemonId;
     public List<Integer> chosenPokemonIds;
