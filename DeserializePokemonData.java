@@ -34,12 +34,12 @@ class Pokemon implements Serializable {
     String attribute;
     List<PokemonAbility> abilities;
 
-    public Pokemon(int id, String name, int HP, String attribute, List<PokemonAbility> abilities) {
-        this.id = id;
-        this.name = name;
-        this.HP = HP;
-        this.attribute = attribute;
-        this.abilities = abilities;
+    // public Pokemon(int id, String name, int HP, String attribute, List<PokemonAbility> abilities) {
+    //     this.id = id;
+    //     this.name = name;
+    //     this.HP = HP;
+    //     this.attribute = attribute;
+    //     this.abilities = abilities;
     }
 
     @Override
