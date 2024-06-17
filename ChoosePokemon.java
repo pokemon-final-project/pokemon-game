@@ -210,7 +210,15 @@ public class ChoosePokemon extends JFrame {
         submitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(player1PokemonId.size() <= 0){
+                    JOptionPane.showMessageDialog(null, "不能自己上場!");
+                    return;
+                }
                 if (round == 1) {
+                    if(player2PokemonId.size() <= 0){
+                        JOptionPane.showMessageDialog(null, "不能自己上場!");
+                        return;
+                    }
                     round = 2;
                     updateNorthBoxLabel(northBox);
                     updateSubmitButtonLabel(submitButton);
