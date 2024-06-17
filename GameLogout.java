@@ -11,7 +11,7 @@ public class GameLogout extends JFrame {
         // 背景圖片
         backgroundImage = new ImageIcon("pokemon-data/image/" + "pokemon-background" + ".jpeg").getImage();
         // 按鈕圖片 縮小尺寸
-        ImageIcon originalIcon = new ImageIcon("pokemon-data/image/" + "game-ending" + ".png");
+        ImageIcon originalIcon = new ImageIcon("pokemon-data/image/" + "new-ending-remove" + ".png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(400, 170, Image.SCALE_SMOOTH);
         gameOverImageIcon = new ImageIcon(scaledImage);
 
@@ -53,30 +53,14 @@ public class GameLogout extends JFrame {
         gameOverImageLabel.setBounds(0, 0, gameOverImageIcon.getIconWidth(), gameOverImageIcon.getIconHeight());
         layeredPane.add(gameOverImageLabel, JLayeredPane.DEFAULT_LAYER);
 
-        // 重新開始按鈕
-        JButton restartButton = new JButton("重新開始");
-        restartButton.setBounds(150, 105, 100, 30);
-        restartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                restartGame();
-            }
-        });
-        layeredPane.add(restartButton, JLayeredPane.MODAL_LAYER);
-
-        centerPanel.add(layeredPane, gbc);
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
+         centerPanel.add(layeredPane, gbc);
+         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
         // 添加主面板到框架
         add(mainPanel);
 
         // 設置框架可見
         setVisible(true);
-    }
-
-    private void restartGame() {
-        dispose(); // 關閉當前窗口
-        new GameLogin(); // 假設 GameLogin 是遊戲的啟動類
     }
 
     public static void main(String[] args) {
