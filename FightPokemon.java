@@ -17,12 +17,12 @@ public class FightPokemon extends JFrame {
     private int round = 1;
     public int operationMode = 0;
 
-    public List<Pokemon> player1List;
-    public Pokemon player1Current;
+    private List<Pokemon> player1List;
+    private Pokemon player1Current;
     private int player1DeadAmount;
 
-    public List<Pokemon> player2List;
-    public Pokemon player2Current;
+    private List<Pokemon> player2List;
+    private Pokemon player2Current;
     private int player2DeadAmount;
     
 
@@ -343,15 +343,28 @@ public class FightPokemon extends JFrame {
                             JLabel selectedLabel = (JLabel) e.getSource();
                             selectedLabel.setBorder(new LineBorder(Color.BLACK, 6));
                             if(round == 1){
-                                player1Current = playerList.get(index);
-                                updatePlayer1Current(subbox1,subbox2,operationBox1);
-                                round = 2;
-                                updateRoundLabel(box1);
+                                
+                                //判量歸0的寶可夢不能出場
+                                // System.out.println(playerList.get(index));
+                                if(playerList.get(index).HP > 0){
+                                    player1Current = playerList.get(index);
+                                    updatePlayer1Current(subbox1,subbox2,operationBox1);
+                                    round = 2;
+                                    updateRoundLabel(box1);
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "你的寶死了，選另外一隻");
+                                }
                             }else{
-                                player2Current = playerList.get(index);
-                                updatePlayer2Current(subbox1, subbox2, operationBox1);
-                                round = 1;
-                                updateRoundLabel(box1);
+                                //判量歸0的寶可夢
+                                // System.out.println(player2Current.HP);
+                                if(playerList.get(index).HP > 0){
+                                    player2Current = playerList.get(index);
+                                    updatePlayer2Current(subbox1, subbox2, operationBox1);
+                                    round = 1;
+                                    updateRoundLabel(box1);
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "你的寶死了，選另外一隻");
+                                }
                             }
                             // System.out.println(player1Current);
                             // System.out.println(player2Current);
@@ -452,7 +465,7 @@ public class FightPokemon extends JFrame {
                     }
                 }
                 if(player2DeadAmount >= player2List.size()){
-                    JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝負");
+                    JOptionPane.showMessageDialog(null, "Player1死光了，Player2獲勝");
                 }
                 updatePlayer2Current(subbox1, subbox2, operationBox1);
             }
@@ -460,9 +473,9 @@ public class FightPokemon extends JFrame {
         }
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
-    }
+    // public void addPropertyChangeListener(PropertyChangeListener pcl) {
+    //     support.addPropertyChangeListener(pcl);
+    // }
 
 
     // public static void main(String[] args) {

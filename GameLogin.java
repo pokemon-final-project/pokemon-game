@@ -1,12 +1,20 @@
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+// import org.w3c.dom.events.MouseEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 
 public class GameLogin extends JFrame {
     private Image backgroundImage;
     private ImageIcon additionalImageIcon;
-
+    public ChoosePokemon choosePokemon;
+    private PropertyChangeSupport support;
+    private int summit = 0;
     public GameLogin() {
         // 加載背景圖片
         backgroundImage = new ImageIcon("pokemon-data/image/" + "pokemon-background" + ".jpeg").getImage();
@@ -19,7 +27,7 @@ public class GameLogin extends JFrame {
         setTitle("Pokemon Login");
 
         // 設定框架的大小
-        setSize(1250, 1000 );
+        setSize(1300, 1000);
 
         // 設定預設關閉操作
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +68,7 @@ public class GameLogin extends JFrame {
         yesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                startCharacterSelection();
+                choosePokemon = new ChoosePokemon();
             }
         });
         layeredPane.add(yesButton, JLayeredPane.MODAL_LAYER);
@@ -68,13 +76,13 @@ public class GameLogin extends JFrame {
         // 否按鈕
         JButton noButton = new JButton("否");
         noButton.setBounds(220, 80, 80, 30);
-        noButton.addActionListener(new ActionListener() {
+        noButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "還是可以玩");
-                startCharacterSelection();
+            public void mouseClicked(MouseEvent e) {
+                setSummit(1);
             }
         });
+        
         layeredPane.add(noButton, JLayeredPane.MODAL_LAYER);
 
         centerPanel.add(layeredPane, gbc);
@@ -87,10 +95,16 @@ public class GameLogin extends JFrame {
         setVisible(true);
     }
 
-    private void startCharacterSelection() {
-        // 這裡可以添加選擇角色的代碼或打開選擇角色的界面
-        System.out.println("開始選角色");
+    public void setSummit(int summit) {
+        int oldSummit = this.summit;
+        this.summit = summit;
+        support.firePropertyChange("summit", oldSummit, summit);
     }
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
 
     public static void main(String[] args) {
         // 創建並顯示登錄框架

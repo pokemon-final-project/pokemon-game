@@ -60,7 +60,7 @@ public class SerializePokemonData {
     public static void main(String[] args) {
         // Create a list of Pokemon
         List<Pokemon> pokemonList = new ArrayList<>();
-        String[] names = { "妙蛙種子", "霸王花","小火龍",  "噴火龍", "水箭龜","傑尼龜", "皮卡丘", "胖丁", "雷丘", "胖可丁", "可拉可拉", "沙瓦郎", "卡比獸", "拉普拉斯", "伊布", "火伊布", "雷伊布", "水伊布", "太陽伊布", "月亮伊布", "艾路雷朵", "波克基斯", "飛天螳螂", "快龍", "迷你龍", "哈克龍", "頑皮彈", "魔牆人偶", "寶石海星", "拉帝歐斯"};
+        String[] names = { "妙蛙種子", "霸王花","小火龍",  "噴火龍","傑尼龜","水箭龜", "皮卡丘", "雷丘", "可逹鴨",  "喵喵", "小拳石", "大蒽鴨", "大岩蛇", "鯉魚王", "卡比獸", "超夢", "快龍", "雷公", "洛奇亞", "波士可多拉", "正電拍拍", "負電拍拍", "鐵螫龍蝦", "風鈴鈴", "大比鳥","九尾", "怪力", "呆呆獸", "韓國魚", "菜英文"};
         String[] attributes = {"fire", "grass", "water", "electric", "fairy", "grass", "fire", "water", "electric", "fairy", "ground", "fighting", "normal", "water", "normal", "fire", "electric", "water", "psychic", "dark", "psychic", "fairy", "bug", "dragon", "dragon", "dragon", "electric", "psychic", "water", "dragon"};
         
         Random random = new Random();
