@@ -11,13 +11,14 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+// initialization
 public class ChoosePokemon extends JFrame {
     private int currentPokemonId;
     public List<Integer> chosenPokemonIds;
-    List<Pokemon> pokemonList;
-    private int summit = 0; // 修改為實例變量
+    List<Pokemon> pokemonList; //紀錄序列化的寶可夢資料
+    private int summit = 0;
     private PropertyChangeSupport support;
-    private int round = 1;
+    private int round = 1; //round = 1玩家一 round = 2玩家二
     public List<Integer> player1PokemonId;
     public List<Integer> player2PokemonId;
 
@@ -38,7 +39,7 @@ public class ChoosePokemon extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // 設置框架的大小
+        // 設置框架大小
         setSize(1300, 1000);
 
         // 初始化主面板並設置為 BorderLayout
@@ -83,7 +84,7 @@ public class ChoosePokemon extends JFrame {
         JPanel westBox = new JPanel(new GridLayout(6, 5));
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 1; i <= 30; i++) { //把所有寶可夢的圖片選取按鈕放進去
             int index = i;
             ImageIcon icon = new ImageIcon("pokemon-data/image/" + i + ".png");
             Image image = icon.getImage();
@@ -101,6 +102,7 @@ public class ChoosePokemon extends JFrame {
                     timer.setRepeats(false);
                     timer.start();
 
+                    // 將兩個player的pokemon加進去arraylist, player1
                     if (round == 1) {
                         if (player1PokemonId.size() >= 0 && player1PokemonId.size() < 6) {
                             player1PokemonId.add(index);
@@ -118,7 +120,7 @@ public class ChoosePokemon extends JFrame {
                             JOptionPane.showMessageDialog(null, "Pokemon數量已達上限");
                         }
                         repaint();
-                    } else {
+                    } else { //player 2
                         if (player2PokemonId.size() >= 0 && player2PokemonId.size() < 6) {
                             player2PokemonId.add(index);
                             System.out.println(player2PokemonId);
@@ -139,7 +141,7 @@ public class ChoosePokemon extends JFrame {
                 }
 
                 @Override
-                public void mouseEntered(MouseEvent e) {
+                public void mouseEntered(MouseEvent e) { //鼠標移動到寶可夢圖片顯示屬性
                     JLabel enteredLabel = (JLabel) e.getSource();
                     enteredLabel.setBorder(new LineBorder(Color.RED));
 
@@ -222,6 +224,7 @@ public class ChoosePokemon extends JFrame {
         setVisible(true);
     }
 
+    
     private void updateNorthBoxLabel(JLabel label) {
         if (round == 1) {
             label.setText("Player1請選擇你的隊伍");
