@@ -15,7 +15,7 @@ public class FightPokemon extends JFrame {
     private List<Pokemon> pokemonList;
     private PropertyChangeSupport support;
     private int round = 1;
-    public int operationMode = 0;
+    private int operationMode = 0;
 
     private List<Pokemon> player1List;
     private Pokemon player1Current;
@@ -141,6 +141,7 @@ public class FightPokemon extends JFrame {
         JPanel operationBox2 = new JPanel(new GridLayout(2, 2));
         operationBox2.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
         
+        //攻擊label
         JLabel actionLabel1 = new JLabel("攻擊", SwingConstants.CENTER);
         actionLabel1.setFont(new Font("Serif", Font.PLAIN, 20));
         actionLabel1.addMouseListener(new MouseAdapter() {
@@ -149,7 +150,6 @@ public class FightPokemon extends JFrame {
                     JLabel selectedLabel = (JLabel) e.getSource();
                     selectedLabel.setBorder(new LineBorder(Color.BLACK, 6));
                     operationMode = 1;
-                    operationBox1.removeAll();
                     if(round == 1){
                         updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
                     }else{
@@ -174,15 +174,15 @@ public class FightPokemon extends JFrame {
         });
         updateOperationMode(1, operationBox1, player2List, subbox1, subbox2);
         // actionLabel1.setBorder(new LineBorder(Color.BLACK, 2));
-        
         operationBox2.add(actionLabel1);
 
-        JLabel actionLabel2 = new JLabel("背包", SwingConstants.CENTER);
-        actionLabel2.setFont(new Font("Serif", Font.PLAIN, 20));
         
-        // actionLabel2.setBorder(new LineBorder(Color.BLACK, 2));
+        //空白(Grid排版)
+        JLabel actionLabel2 = new JLabel("", SwingConstants.CENTER);
         operationBox2.add(actionLabel2);
 
+
+        //換寶label
         JLabel actionLabel3 = new JLabel("換寶可夢", SwingConstants.CENTER);
         actionLabel3.setFont(new Font("Serif", Font.PLAIN, 20));
         actionLabel3.addMouseListener(new MouseAdapter() {
@@ -194,11 +194,8 @@ public class FightPokemon extends JFrame {
                 operationBox1.removeAll();
                 if(round == 1 ){
                     updateOperationMode(operationMode,operationBox1,player1List, subbox1, subbox2);
-                    // updatePlayer1Current(subbox1);
-                    // repaint();
                 }else{
                     updateOperationMode(operationMode,operationBox1,player2List, subbox1, subbox2);
-                    // repaint();
                 }
                 repaint();
             }
@@ -221,7 +218,27 @@ public class FightPokemon extends JFrame {
 
         JLabel actionLabel4 = new JLabel("逃跑", SwingConstants.CENTER);
         actionLabel4.setFont(new Font("Serif", Font.PLAIN, 20));
-        // actionLabel4.setBorder(new LineBorder(Color.BLACK, 2));
+        actionLabel4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                surrender(round);
+                repaint();
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                JLabel enteredLabel = (JLabel) e.getSource();
+                enteredLabel.setBorder(new LineBorder(Color.RED));
+                repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                JLabel exitedLabel = (JLabel) e.getSource();
+                exitedLabel.setBorder(null);
+                repaint();
+            }
+        });
         operationBox2.add(actionLabel4);
 
         operationBox2Border.add(operationBox2, BorderLayout.CENTER);
@@ -254,16 +271,12 @@ public class FightPokemon extends JFrame {
 
     private void updateOperationMode(int operationMode, JPanel operationBox1, List<Pokemon> playerList, JPanel subbox1, JPanel subbox2){
         switch (operationMode) {
-            case 0:
-                checkCurrentPokemonDie(player1Current, subbox1, subbox2, operationBox1);
-                operationBox1.removeAll();
             case 1:
-                // JPanel operationBox1 = new JPanel(new GridLayout(2, 2));
                 operationBox1.removeAll();
                 for(int i=0;i<4;i++){
                     int index = 1;
                     if(round == 1){
-                        JLabel ability = new JLabel(player1Current.abilities.get(i).name, SwingConstants.CENTER);
+                        JLabel ability = new JLabel(player1Current.abilities.get(i).name+"(傷害︰" + player1Current.abilities.get(i).damage + ")", SwingConstants.CENTER);
                         ability.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
@@ -293,14 +306,13 @@ public class FightPokemon extends JFrame {
                         operationBox1.add(ability);
                         
                     }else{
-                        JLabel ability = new JLabel(player2Current.abilities.get(i).name, SwingConstants.CENTER);
+                        JLabel ability = new JLabel(player2Current.abilities.get(i).name+"(傷害︰" + player2Current.abilities.get(i).damage + ")", SwingConstants.CENTER);
                         ability.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 player1Current.HP = player1Current.HP - player2Current.abilities.get(index).damage;
                                 checkCurrentPokemonDie(player1Current, subbox1, subbox2, operationBox1);
                                 round = 1;
-                                // checkCurrentPokemonDie(player2Current, subbox1, subbox2, operationBox1);
                                 updatePlayer1Current(subbox1, subbox2, operationBox1);
                                 updateRoundLabel(box1);
                                 repaint();
@@ -325,11 +337,9 @@ public class FightPokemon extends JFrame {
                 }
                 break;
             case 2:
-                // JPanel operationBox1 = new JPanel(new GridLayout(2, 2));
-                operationBox1.removeAll();
+                //無功能
                 break;
             case 3:
-                // System.out.println(player1List);
                 for(int i=0;i<playerList.size();i++){
                     int index = i;
                     ImageIcon icon = new ImageIcon("pokemon-data/image/" + playerList.get(i).id + ".png");
@@ -343,14 +353,13 @@ public class FightPokemon extends JFrame {
                             JLabel selectedLabel = (JLabel) e.getSource();
                             selectedLabel.setBorder(new LineBorder(Color.BLACK, 6));
                             if(round == 1){
-                                
-                                //判量歸0的寶可夢不能出場   
-                                // System.out.println(playerList.get(index));
+                                //判量歸0的寶可夢不能出場
                                 if(playerList.get(index).HP > 0){
                                     player1Current = playerList.get(index);
                                     updatePlayer1Current(subbox1,subbox2,operationBox1);
                                     round = 2;
                                     updateRoundLabel(box1);
+                                    updateOperationMode(1, operationBox1, playerList, subbox1, subbox2);
                                 }else{
                                     JOptionPane.showMessageDialog(null, "你的寶死了，選另外一隻");
                                 }
@@ -362,6 +371,7 @@ public class FightPokemon extends JFrame {
                                     updatePlayer2Current(subbox1, subbox2, operationBox1);
                                     round = 1;
                                     updateRoundLabel(box1);
+                                    updateOperationMode(1, operationBox1, playerList, subbox1, subbox2);
                                 }else{
                                     JOptionPane.showMessageDialog(null, "你的寶死了，選另外一隻");
                                 }
@@ -440,10 +450,6 @@ public class FightPokemon extends JFrame {
 
     public void checkCurrentPokemonDie(Pokemon CurrentPokemon,JPanel subbox1,JPanel subbox2,JPanel operationBox1){
         //當前pokemon陣亡後自動更換List中第二隻Pokemon
-        // System.out.println(player1DeadAmount);
-        // System.out.println(player2DeadAmount);
-        // System.out.println(player1List.size());
-        // System.out.println(player2List.size());
         if(CurrentPokemon.HP <= 0){
             operationMode = 3;
             // System.out.println(player1List);
@@ -481,6 +487,15 @@ public class FightPokemon extends JFrame {
         }
     }
 
+    public void surrender(int round){
+        if(round == 1){
+            JOptionPane.showMessageDialog(null, "player1是投降，player2獲勝");
+        }else{
+            JOptionPane.showMessageDialog(null, "player2是投降，player1獲勝");
+        }
+        dispose();
+        GameLogout gameLogout = new GameLogout();
+    }
     // public void addPropertyChangeListener(PropertyChangeListener pcl) {
     //     support.addPropertyChangeListener(pcl);
     // }
