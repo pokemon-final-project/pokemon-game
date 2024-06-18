@@ -37,7 +37,6 @@ public class FightPokemon extends JFrame {
     
 
         support = new PropertyChangeSupport(this);
-        // System.out.println(player1List);
         // 載入Pokemon Data(反序列化)
         try (FileInputStream fis = new FileInputStream("pokemon_data.ser");
             ObjectInputStream ois = new ObjectInputStream(fis)) {
@@ -269,6 +268,7 @@ public class FightPokemon extends JFrame {
         }
     }
 
+    //更新操作欄
     private void updateOperationMode(int operationMode, JPanel operationBox1, List<Pokemon> playerList, JPanel subbox1, JPanel subbox2){
         switch (operationMode) {
             case 1:
@@ -365,7 +365,6 @@ public class FightPokemon extends JFrame {
                                 }
                             }else{
                                 //判量歸0的寶可夢
-                                // System.out.println(player2Current.HP);
                                 if(playerList.get(index).HP > 0){
                                     player2Current = playerList.get(index);
                                     updatePlayer2Current(subbox1, subbox2, operationBox1);
@@ -404,6 +403,7 @@ public class FightPokemon extends JFrame {
         }
     }
     
+    //更新Player1&2的界面(對戰框)
     public void updatePlayer1Current(JPanel subbox1,JPanel subbox2,JPanel operationBox1){
         subbox1.removeAll();
         //扣血時血量會變紅一下
@@ -448,6 +448,7 @@ public class FightPokemon extends JFrame {
         repaint();
     }
 
+    //檢查當前寶可夢是否死亡
     public void checkCurrentPokemonDie(Pokemon CurrentPokemon,JPanel subbox1,JPanel subbox2,JPanel operationBox1){
         //當前pokemon陣亡後自動更換List中第二隻Pokemon
         if(CurrentPokemon.HP <= 0){
