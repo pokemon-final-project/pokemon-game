@@ -496,9 +496,6 @@ public class FightPokemon extends JFrame {
         dispose();
         GameLogout gameLogout = new GameLogout();
     }
-    // public void addPropertyChangeListener(PropertyChangeListener pcl) {
-    //     support.addPropertyChangeListener(pcl);
-    // }
 
 
     // public static void main(String[] args) {
